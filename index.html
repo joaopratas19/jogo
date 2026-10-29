@@ -24,9 +24,7 @@
                 <h2>Ocorrências Ativas</h2>
                 <button id="btn-gerar" class="btn-action">Gerar Alerta 🚨</button>
             </div>
-            <ul id="incident-list" class="incident-board">
-                <!-- O JavaScript vai injetar as missões aqui -->
-            </ul>
+            <ul id="incident-list" class="incident-board"></ul>
         </section>
 
         <!-- ECRÃ 2: Garagem -->
@@ -37,7 +35,7 @@
             <ul id="frota-list" class="lista-simples"></ul>
         </section>
 
-        <!-- ECRÃ 3: Pessoal -->
+        <!-- ECRÃ 3: Pessoal e ENB -->
         <section id="tab-pessoal" class="view-section hidden">
             <div class="section-header">
                 <h2>Efetivo (Quartel)</h2>
@@ -54,7 +52,21 @@
         <button class="nav-btn" data-target="tab-pessoal">👥<br>Quartel</button>
     </nav>
 
-    <!-- Scripts (A ordem é muito importante!) -->
+    <!-- MODAL DE DESPACHO (Pop-up de Comando) -->
+    <div id="modal-despacho" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-titulo">Comando Tático</h2>
+            <p id="modal-info"></p>
+            <hr>
+            <h3>Viaturas Disponíveis</h3>
+            <ul id="lista-veiculos-despacho" class="lista-simples"></ul>
+            <div class="modal-botoes">
+                <button id="btn-enviar-meios" class="btn-action">Confirmar Despacho</button>
+                <button id="btn-fechar-modal" class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="data.js"></script>
     <script src="game.js"></script>
     <script src="ui.js"></script>

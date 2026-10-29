@@ -1,19 +1,29 @@
-// Bases de Dados de Viaturas, Cursos e Tipos de Missão
 const frotaConfig = {
     ABSC: { nome: "Ambulância de Socorro", custo: 55000 },
     VSAE: { nome: "Veíc. Socorro e Assist.", custo: 85000 },
     VFCI: { nome: "Veíc. Florestal de Combate", custo: 70000 },
-    VUCI: { nome: "Veíc. Urbano de Combate", custo: 90000 }
+    VUCI: { nome: "Veíc. Urbano de Combate", custo: 90000 },
+    VTGC: { nome: "Veíc. Tanque Grande Cap.", custo: 75000 }
+};
+
+const cursosENB = {
+    TAT: { nome: "TAT", custo: 500 },
+    DESENCARCERAMENTO: { nome: "Desencarceramento", custo: 1000 },
+    INCENDIOS_FLORESTAIS: { nome: "Fogo Florestal", custo: 800 },
+    INCENDIOS_URBANOS: { nome: "Fogo Urbano", custo: 1200 },
+    CONTROLO_MULTIDAO: { nome: "Controlo Multidões", custo: 1000 },
+    CINOTECNIA_K9: { nome: "Busca K9", custo: 2500 },
+    MERGULHO_FORENSE: { nome: "Mergulho Forense", custo: 3000 }
 };
 
 const missoesBase = [
     { id: "1101", desc: "Doença Súbita na Via Pública", reqNivel: 1, recompensa: 5000, xp: 200 },
-    { id: "2401", desc: "Atropelamento (EN365)", reqNivel: 1, recompensa: 8000, xp: 300 },
+    { id: "2401", desc: "Atropelamento", reqNivel: 1, recompensa: 8000, xp: 300 },
     { id: "3101", desc: "Fogo em Mato / Agrícola", reqNivel: 1, recompensa: 7000, xp: 250 },
     { id: "2301", desc: "Acidente Rodoviário c/ Encarcerados", reqNivel: 3, recompensa: 15000, xp: 500 },
     { id: "2101", desc: "Incêndio Urbano - Habitação", reqNivel: 3, recompensa: 20000, xp: 600 },
     { id: "2115", desc: "Incêndio Industrial", reqNivel: 5, recompensa: 45000, xp: 1200 },
-    { id: "4101", desc: "Busca K9 - Desaparecido na Serra", reqNivel: 5, recompensa: 30000, xp: 1000 },
+    { id: "4101", desc: "Busca K9 - Desaparecido", reqNivel: 5, recompensa: 30000, xp: 1000 },
     { id: "9000", desc: "Motim / Controlo de Multidão", reqNivel: 7, recompensa: 80000, xp: 2000 }
 ];
 

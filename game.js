@@ -1,43 +1,34 @@
-// Estado Atual do Jogo (Inicia com a tua Base Standard)
+const nomesBase = ["João", "Martim", "Zé", "Artolas", "Bode", "Pato", "Ana", "Jorge", "Manel", "Jaquim", "Panisga", "Rui"];
+const apelidosBase = ["Pratas", "Jagunço", "Silva", "Costa", "Ferreira", "Gomes", "Urso"];
+
 let estado = {
-    dinheiro: 50000,
-    xp: 0,
-    nivelAtual: 1,
-    frota: ["VFCI", "VSAE", "ABSC"],
-    pessoalCount: 10,
-    ocorrencias: []
+    dinheiro: 50000, xp: 0, nivelAtual: 1,
+    frota: [
+        { id: "V01", tipo: "VFCI", estado: "disponivel" },
+        { id: "V02", tipo: "VSAE", estado: "disponivel" },
+        { id: "V03", tipo: "ABSC", estado: "disponivel" }
+    ],
+    pessoal: [], ocorrencias: [], ocorrenciaEmFoco: null
 };
 
-// Lógica Principal
+function gerarPessoalBase() {
+    for(let i = 0; i < 10; i++) {
+        let nome = nomesBase[Math.floor(Math.random() * nomesBase.length)] + " " + apelidosBase[Math.floor(Math.random() * apelidosBase.length)];
+        estado.pessoal.push({
+            id: "B" + i, nome: nome,
+            cursos: ["TAT", "INCENDIOS_FLORESTAIS"], 
+            estado: "disponivel" 
+        });
+    }
+}
+gerarPessoalBase();
+
 function gerarMissao() {
-    // Filtra missões que o jogador já tem nível para fazer
     let missoesValidas = missoesBase.filter(m => m.reqNivel <= estado.nivelAtual);
     let missaoSorteada = missoesValidas[Math.floor(Math.random() * missoesValidas.length)];
-    
-    let novaOcorrencia = {
-        idOcorr: "REQ-" + Math.floor(Math.random() * 10000),
-        dados: missaoSorteada
-    };
-    
+    let novaOcorrencia = { idOcorr: "REQ-" + Math.floor(Math.random() * 10000), dados: missaoSorteada };
     estado.ocorrencias.push(novaOcorrencia);
     atualizarEcra();
-}
-
-function resolverMissao(idOcorr) {
-    // Encontra e remove a missão da lista
-    let index = estado.ocorrencias.findIndex(o => o.idOcorr === idOcorr);
-    if (index > -1) {
-        let missao = estado.ocorrencias[index].dados;
-        
-        // Dá o dinheiro e XP
-        estado.dinheiro += missao.recompensa;
-        estado.xp += missao.xp;
-        
-        estado.ocorrencias.splice(index, 1);
-        
-        verificarSubidaNivel();
-        atualizarEcra();
-    }
 }
 
 function verificarSubidaNivel() {
@@ -46,5 +37,25 @@ function verificarSubidaNivel() {
         estado.nivelAtual = proxNivel.nivel;
         estado.dinheiro += proxNivel.bonus;
         alert(`Foste Promovido a ${proxNivel.titulo}!\nBónus: €${proxNivel.bonus.toLocaleString()}`);
+    }
+}
+
+function enviarParaENB(idBombeiro, cursoId, custo) {
+    if (estado.dinheiro < custo) {
+        alert("Comandante, não temos fundos para esta formação!");
+        return;
+    }
+    let bomb = estado.pessoal.find(b => b.id === idBombeiro);
+    if(bomb && bomb.estado === "disponivel") {
+        estado.dinheiro -= custo;
+        bomb.estado = "em_formacao";
+        atualizarEcra();
+        
+        setTimeout(() => {
+            bomb.cursos.push(cursoId);
+            bomb.estado = "disponivel";
+            alert(`🚒 Formação Concluída: ${bomb.nome} tirou o curso de ${cursosENB[cursoId].nome}!`);
+            atualizarEcra();
+        }, 10000); 
     }
 }
