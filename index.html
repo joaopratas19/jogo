@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Comandante 112</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Barra de Topo -->
+    <header class="top-bar">
+        <div class="stats">
+            <div id="player-rank" class="badge">Bombeiro de 3ª</div>
+            <div id="player-funds">€ 50.000</div>
+        </div>
+    </header>
+
+    <!-- Área Principal de Jogo -->
+    <main id="game-view">
+        
+        <!-- ECRÃ 1: Ocorrências -->
+        <section id="tab-ocorrencias" class="view-section active">
+            <div class="section-header">
+                <h2>Ocorrências Ativas</h2>
+                <button id="btn-gerar" class="btn-action">Gerar Alerta 🚨</button>
+            </div>
+            <ul id="incident-list" class="incident-board">
+                <!-- O JavaScript vai injetar as missões aqui -->
+            </ul>
+        </section>
+
+        <!-- ECRÃ 2: Garagem -->
+        <section id="tab-garagem" class="view-section hidden">
+            <div class="section-header">
+                <h2>Garagem (Frota)</h2>
+            </div>
+            <ul id="frota-list" class="lista-simples"></ul>
+        </section>
+
+        <!-- ECRÃ 3: Pessoal -->
+        <section id="tab-pessoal" class="view-section hidden">
+            <div class="section-header">
+                <h2>Efetivo (Quartel)</h2>
+            </div>
+            <ul id="pessoal-list" class="lista-simples"></ul>
+        </section>
+
+    </main>
+
+    <!-- Menu Inferior -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-target="tab-ocorrencias">🚨<br>Alertas</button>
+        <button class="nav-btn" data-target="tab-garagem">🚒<br>Frota</button>
+        <button class="nav-btn" data-target="tab-pessoal">👥<br>Quartel</button>
+    </nav>
+
+    <!-- Scripts (A ordem é muito importante!) -->
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>
